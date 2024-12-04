@@ -1,0 +1,53 @@
+<div class="pb15" *ngIf="(model | json) === '{}'">
+  <!--  <nz-empty nzNotFoundImage="simple" [nzNotFoundContent]="contentTpl">-->
+  <!--    <ng-template #contentTpl>-->
+  <!--      <span i18n>Click the send button to get a test report</span>-->
+  <!--    </ng-template>-->
+  <!--  </nz-empty>-->
+  <!-- <pc-response-steps></pc-response-steps> -->
+</div>
+<div class="p-[20px]" *ngIf="model && (model | json) !== '{}'">
+  <!-- Test Alert Tip -->
+  <eo-ng-feedback-alert
+    class="eo-alert-bar"
+    *ngFor="let item of model.reportList"
+    [nzType]="item.type === 'interrupt' ? 'error' : 'info'"
+    [nzMessage]="item.content?.toString()"
+    nzShowIcon
+  >
+  </eo-ng-feedback-alert>
+  <!-- Response -->
+  <div *ngIf="model.responseType">
+    <ng-container *ngIf="responseIsImg; else stream">
+      <img loading="lazy" class="max-w-full" [src]="imgBlobUrl" />
+    </ng-container>
+    <ng-template #stream>
+      <ng-container *ngIf="model.responseType === 'stream' && model.responseLength > 500000; else longText">
+        <div class="text-center">
+          <span i18n>Unable to preview non-text type data, you can</span>
+          <button type="button" (click)="downloadResponseText()" i18n="@@downloadResponse"> download response </button>
+          <span i18n>and open it with other programs.</span>
+        </div>
+      </ng-container>
+    </ng-template>
+    <ng-template #longText>
+      <ng-container *ngIf="model.responseType === 'longText' && model.responseLength > 500000; else other">
+        <div class="text-center">
+          <span i18n>The response result exceeds the previewable size, you can</span>
+          <button i18n="@@downloadResponse" type="button" (click)="downloadResponseText()"> download response </button>
+        </div>
+      </ng-container>
+    </ng-template>
+    <ng-template #other>
+      <eo-monaco-editor
+        class="border-all"
+        [autoFormat]="true"
+        [autoHeight]="true"
+        [autoType]="true"
+        [code]="responseBody"
+        [config]="{ readOnly: true }"
+        [eventList]="['type', 'format', 'copy', 'search']"
+      ></eo-monaco-editor>
+    </ng-template>
+  </div>
+</div>

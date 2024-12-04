@@ -2,6 +2,11 @@
 
 # compiled output
 dist/
+/build/ElectronInstall/
+/build/FilesToInstall/
+/build/Output/
+/build/NiuNiuCaptureElectronDemo/
+/build/SetupScripts/skinpwd.nsh
 out/
 /tmp
 /out-tsc
@@ -9,14 +14,12 @@ out/
 /release
 *.js
 *.js.map
-*.webpack.js
-!src/workbench/node/electron/**/*.js
-!src/workbench/node/request/**/*.js
-!src/workbench/node/server/**/*.js
+!patches/*
+!src/node/**/*.js
 !/api/*.js
-!/scripts/*.js
+!/scripts/**/*.js
 !*.config.js
-!upload.js
+!.*.js
 
 # dependencies
 node_modules
@@ -54,3 +57,9 @@ Thumbs.db
 # *-lock.json
 -error.log
 .vercel
+nginx-test.conf
+docker-compose.dev.yml
+Dockerfile.dev
+
+#cache
+buildFile

@@ -1,0 +1,51 @@
+// nz-divider {
+//   margin: 0.1em 0;
+// }
+
+:host ::ng-deep {
+  eo-ng-select eo-ng-select-top-control {
+    border: none !important;
+  }
+
+  .ant-select {
+    width: 140px;
+  }
+
+  .ant-select-selector {
+    box-shadow: unset !important;
+  }
+}
+
+.content {
+  color: var(--text-color);
+}
+
+.title {
+  background-color: var(--item-active-background-color);
+  color: var(--text-color);
+}
+
+::ng-deep {
+  .env-selector-dropdown {
+    width: 224px;
+  }
+
+  .preview-env .ant-popover-inner-content {
+    padding: 0;
+  }
+
+  .env-select {
+    .ant-select .clear-btn:hover eo-iconpark-icon {
+      background-color: var(--item-active-background-color);
+    }
+
+    .clear-btn eo-iconpark-icon {
+      padding: 3px;
+      border-radius: 50%;
+
+      svg {
+        color: var(--danger-color) !important;
+      }
+    }
+  }
+}
